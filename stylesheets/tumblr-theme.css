@@ -411,12 +411,12 @@ footer
     width: 128px
 }
 
-footer .attribution a,footer .attribution a: link,footer .attribution a:visited
+footer .attribution a:link,footer .attribution a:visited
 {
     color: #ccc
 }
 
-footer:hover .attribution a
+footer .attribution a
 {
     color: #888
 }
