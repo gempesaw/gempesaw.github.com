@@ -1,0 +1,29 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+* {
+    overflow: auto;
+}
+
+body {
+    color: #444;
+    background: #fff;
+    font-family: 'Vollkorn', Georgia, serif;
+    font-size: 24px;
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 100px auto;
+    max-width: 800px;
+    width: 90%;
+}
+
+ul {
+    font-size: 18px;
+}
+
+ul.talks li {
+    margin: 1em
+}
