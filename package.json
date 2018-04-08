@@ -1,0 +1,27 @@
+{
+  "name": "gempesaw.github.com",
+  "version": "1.0.0",
+  "description": "a personal webiste",
+  "main": "index.js",
+  "scripts": {
+    "build": "markdown-it README.md -o index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gempesaw/gempesaw.github.com.git"
+  },
+  "keywords": [
+    "gempesaw",
+    "homepage",
+    "website"
+  ],
+  "author": "Daniel Gempesaw <dgempesaw@sharecare.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gempesaw/gempesaw.github.com/issues"
+  },
+  "homepage": "https://github.com/gempesaw/gempesaw.github.com#readme",
+  "dependencies": {
+    "markdown-it": "^8.4.1"
+  }
+}
