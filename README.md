@@ -15,6 +15,7 @@ projects. Outside of coding, I enjoy [playing ultimate][], going
 - [code blog][]
 - [twitter][]
 - [last.fm][]
+- [email][]
 
 
 [Sharecare]: https://www.sharecare.com
@@ -26,3 +27,4 @@ projects. Outside of coding, I enjoy [playing ultimate][], going
 [code blog]: http://blog.danielgempesaw.com
 [twitter]: https://twitter.com/dgempesaw
 [last.fm]: https://last.fm/user/escore
+[email]: mailto:gempesaw@gmail.com
