@@ -1,13 +1,11 @@
-Hi! I'm Dan. I work on internal tools on the Architecture team at
-[Sharecare][], where I'm currently working on converting our
-microservices to Kubernetes by building a container-optimized CI & CD
-infrastructure layer with custom integrations for our development
-lifecycle.
+Hi! I'm Dan. I'm part of the Sustainability team at [PagerDuty][],
+where I'm currently working on modernizing and updating the monolith,
+along with building and maintaining Elixir microservices.
 
-On occasion, I write in my [code & web blog][] and explore
-[side projects][] whenever I can spin out my work into open source
-projects. Outside of coding, I enjoy [playing ultimate][], going
-[snowboarding][], and playing a smattering of instruments.
+On rare occasions, I write in my [code & web blog][] and explore [side
+projects][] whenever I can spin out my work into open source
+projects. Outside of coding, I enjoy [ultimate][], [snowboarding][],
+video games, and playing a smattering of instruments.
 
 ##### find me ?
 
@@ -18,7 +16,7 @@ projects. Outside of coding, I enjoy [playing ultimate][], going
 - [resume (pdf)][]
 - [linkedin][]
 
-[Sharecare]: https://www.sharecare.com
+[PagerDuty]: https://www.pagerduty.com
 [code & web blog]: https://blog.danielgempesaw.com
 [side projects]: https://github.com/gempesaw
 [playing ultimate]: http://danzorx.tumblr.com/tagged/ultimate
