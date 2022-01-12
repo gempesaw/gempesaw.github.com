@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/gempesaw/gempesaw.github.com#readme",
   "dependencies": {
-    "markdown-it": "^8.4.1"
+    "markdown-it": "^12.3.2"
   }
 }
