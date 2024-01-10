@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
-  const [imagesByFolder, setImagesByFolder] = useState({});
+  const [images, setImages] = useState([]);
   const [photoSrc, setPhotoSrc] = useState('');
   const [correctName, setCorrectName] = useState('');
   const [score, setScore] = useState(0);
@@ -21,9 +21,6 @@ const Home = () => {
   };
 
   const reset = async () => {
-    const response = await fetch('/api/blob');
-    const images = await response.json();
-
     if (images && images.length > 1) {
       const otherImages = images.filter((image) => image.url !== photoSrc);
 
@@ -38,8 +35,16 @@ const Home = () => {
   };
 
   useEffect(() => {
-    reset();
+    (async () => {
+      const response = await fetch('/api/blob');
+      const images = await response.json();
+      setImages(images);
+    })()
   }, []);
+
+  useEffect(() => {
+    reset();
+  }, [images]);
 
   const guess = (guessedName) => {
     if (guessedName === correctName) {
@@ -52,30 +57,35 @@ const Home = () => {
     reset(); // Set up the next round after the user guesses
   };
 
-  return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <Image
-          src={photoSrc}
-          alt="Guess who!"
-          layout="fill"
-          objectFit="cover"
-        />
-      </header>
+  if (images.length === 0) {
+    return 'loading'
+  }
+  else {
+    return (
+      <div className={styles.container}>
+        <header className={styles.header}>
+          <Image
+            src={photoSrc}
+            alt="Guess who!"
+            layout="fill"
+            objectFit="cover"
+          />
+        </header>
 
-      <div className={styles.buttonContainer}>
-        <button className={styles.button} onClick={() => guess("aria")}>aria</button>
-        <button className={styles.button} onClick={() => guess("evie")}>evie</button>
+        <div className={styles.buttonContainer}>
+          <button className={styles.button} onClick={() => guess("aria")}>aria</button>
+          <button className={styles.button} onClick={() => guess("evie")}>evie</button>
+        </div>
+
+        <div className={styles.score}>
+          <p>Score: {score}</p>
+        </div>
+
+        <ToastContainer/>
+
       </div>
-
-      <div className={styles.score}>
-        <p>Score: {score}</p>
-      </div>
-
-      <ToastContainer/>
-
-    </div>
-  );
-};
+    );
+  };
+}
 
 export default Home;
