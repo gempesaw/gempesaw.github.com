@@ -68,7 +68,7 @@ const Home = () => {
             src={photoSrc}
             alt="Guess who!"
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
           />
         </header>
 
