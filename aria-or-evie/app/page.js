@@ -7,6 +7,15 @@ import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const correctPassword = 'cute';
+const userInput = prompt('Enter the password to access the content:');
+
+if (userInput === correctPassword) {
+  alert('Access granted! You can view the content.');
+} else {
+  alert('Incorrect password. Access denied.');
+}
+
 const Home = () => {
   const [imagesByFolder, setImagesByFolder] = useState({});
   const [photoSrc, setPhotoSrc] = useState('');
