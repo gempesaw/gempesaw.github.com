@@ -7,9 +7,6 @@ import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { list } from '@vercel/blob';
-// export const runtime = 'edge';
-
 const Home = () => {
   const [imagesByFolder, setImagesByFolder] = useState({});
   const [photoSrc, setPhotoSrc] = useState('');
@@ -24,24 +21,20 @@ const Home = () => {
   };
 
   const reset = async () => {
-    const blobsList = await list();
-    console.log(blobsList)
+    const response = await fetch('/api/blob');
+    const images = await response.json();
 
-    // if (images && images.length > 1) {
-    //   // Filter out the currently displayed image
-    //   const filteredImages = images.filter(
-    //     (image) => image.path !== photoSrc
-    //   );
+    if (images && images.length > 1) {
+      const otherImages = images.filter((image) => image.url !== photoSrc);
 
-    //   // Pick a random image from the filtered pool
-    //   const randomImage =
-    //     filteredImages[Math.floor(Math.random() * filteredImages.length)];
+      // Pick a random image from the filtered pool
+      const randomImage = otherImages[Math.floor(Math.random() * otherImages.length)];
 
-    //   setPhotoSrc(randomImage.path);
-    //   setCorrectName(randomImage.answer);
-    // } else {
-    //   console.error('Images array is empty or only contains the currently displayed image.');
-    // }
+      setPhotoSrc(randomImage.url);
+      setCorrectName(randomImage.pathname.toLowerCase());
+    } else {
+      console.error('Images array is empty or only contains the currently displayed image.');
+    }
   };
 
   useEffect(() => {
