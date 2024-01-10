@@ -47,7 +47,7 @@ const Home = () => {
   }, [images]);
 
   const guess = (guessedName) => {
-    if (guessedName === correctName) {
+    if (correctName.toLowerCase().includes(guessedName)) {
       myToast('Correct! You guessed right.');
       setScore(score + 1);
     } else {
