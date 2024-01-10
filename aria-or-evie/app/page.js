@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { list } from '@vercel/blob';
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 const Home = () => {
   const [imagesByFolder, setImagesByFolder] = useState({});
