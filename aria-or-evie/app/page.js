@@ -1,95 +1,88 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client';
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import styles from './page.module.css';
 
-export default function Home() {
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { list } from '@vercel/blob';
+export const runtime = 'edge';
+
+const Home = () => {
+  const [imagesByFolder, setImagesByFolder] = useState({});
+  const [photoSrc, setPhotoSrc] = useState('');
+  const [correctName, setCorrectName] = useState('');
+  const [score, setScore] = useState(0);
+
+  const myToast = (msg) => {
+    toast.dismiss();
+    toast(msg, {
+      position: toast.POSITION.TOP_CENTER,
+    })
+  };
+
+  const reset = async () => {
+    const blobsList = await list();
+    console.log(blobsList)
+
+    // if (images && images.length > 1) {
+    //   // Filter out the currently displayed image
+    //   const filteredImages = images.filter(
+    //     (image) => image.path !== photoSrc
+    //   );
+
+    //   // Pick a random image from the filtered pool
+    //   const randomImage =
+    //     filteredImages[Math.floor(Math.random() * filteredImages.length)];
+
+    //   setPhotoSrc(randomImage.path);
+    //   setCorrectName(randomImage.answer);
+    // } else {
+    //   console.error('Images array is empty or only contains the currently displayed image.');
+    // }
+  };
+
+  useEffect(() => {
+    reset();
+  }, []);
+
+  const guess = (guessedName) => {
+    if (guessedName === correctName) {
+      myToast('Correct! You guessed right.');
+      setScore(score + 1);
+    } else {
+      myToast(`Wrong! It's ${correctName}.`);
+    }
+
+    reset(); // Set up the next round after the user guesses
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
+    <div className={styles.container}>
+      <header className={styles.header}>
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          src={photoSrc}
+          alt="Guess who!"
+          layout="fill"
+          objectFit="cover"
         />
+      </header>
+
+      <div className={styles.buttonContainer}>
+        <button className={styles.button} onClick={() => guess("aria")}>aria</button>
+        <button className={styles.button} onClick={() => guess("evie")}>evie</button>
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className={styles.score}>
+        <p>Score: {score}</p>
       </div>
-    </main>
-  )
-}
+
+      <ToastContainer/>
+
+    </div>
+  );
+};
+
+export default Home;
