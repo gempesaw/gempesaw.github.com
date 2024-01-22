@@ -45,14 +45,16 @@
 .score {
     text-align: center;
     position: absolute;
-    bottom: 20vh;
-    left: 5vh;
+    bottom: 10vh;
+    left: 1vh;
     display: flex;
     width: 15%;
     height: 5%;
+    zoom: 200%;
 }
 
 .verify {
     text-align: center;
     margin-top: 20%;
+    zoom: 200%;
 }

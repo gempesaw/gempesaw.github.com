@@ -7,6 +7,12 @@ import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const toastOptions = {
+  position: toast.POSITION.TOP_CENTER,
+  autoClose: 2000,
+  theme: 'colored'
+};
+
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -58,15 +64,11 @@ const Home = () => {
   const guess = (guessedName) => {
     if (correctName.toLowerCase().includes(guessedName)) {
       toast.dismiss();
-      toast.success('Correct! You guessed right.', {
-        position: toast.POSITION.TOP_CENTER
-      })
+      toast.success('Correct! You guessed right.', toastOptions)
       setScore(score + 1);
     } else {
       toast.dismiss();
-      toast.error(`Wrong! It's ${correctName}.`, {
-        position: toast.POSITION.TOP_CENTER
-      })
+      toast.error(`Wrong! It's ${correctName}.`, toastOptions)
     }
 
     reset();
