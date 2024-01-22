@@ -7,11 +7,32 @@ import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
+}
+
+const images = shuffle([
+  "https://f004.backblazeb2.com/file/aria-or-evie/aria.jpg",
+  "https://f004.backblazeb2.com/file/aria-or-evie/evie.jpg"
+]);
+
 const Home = () => {
-  const [images, setImages] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [photoSrc, setPhotoSrc] = useState('');
   const [correctName, setCorrectName] = useState('');
   const [score, setScore] = useState(0);
+  const [verified, setVerified] = useState(false);
+
+  const handleInputChange = (e) => {
+    if (e.target.value == "10") {
+      setVerified(true)
+    }
+  };
 
   const myToast = (msg) => {
     toast.dismiss();
@@ -20,31 +41,12 @@ const Home = () => {
     })
   };
 
-  const reset = async () => {
-    if (images && images.length > 1) {
-      const otherImages = images.filter((image) => image.url !== photoSrc);
-
-      // Pick a random image from the filtered pool
-      const randomImage = otherImages[Math.floor(Math.random() * otherImages.length)];
-
-      setPhotoSrc(randomImage.url);
-      setCorrectName(randomImage.pathname.toLowerCase());
-    } else {
-      console.error('Images array is empty or only contains the currently displayed image.');
-    }
+  const reset = () => {
+    setPhotoSrc(images[currentIndex]);
+    setCorrectName(images[currentIndex].split(/\//).reverse()[0]);
   };
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch('/api/blob');
-      const images = await response.json();
-      setImages(images);
-    })()
-  }, []);
-
-  useEffect(() => {
-    reset();
-  }, [images]);
+  useEffect(reset, []);
 
   const guess = (guessedName) => {
     if (correctName.toLowerCase().includes(guessedName)) {
@@ -54,11 +56,21 @@ const Home = () => {
       myToast(`Wrong! It's ${correctName}.`);
     }
 
+    setCurrentIndex(currentIndex + 1)
     reset(); // Set up the next round after the user guesses
   };
 
-  if (images.length === 0) {
-    return 'loading'
+  if (verified === false) {
+    return (
+      <div className={styles.container}>
+        <header className={styles.header}>
+          <div className={styles.verify}>
+            <p>what month was aria born?</p>
+            <input type="text" onChange={handleInputChange} />
+          </div>
+        </header>
+      </div>
+    )
   }
   else {
     return (
