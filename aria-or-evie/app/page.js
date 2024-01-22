@@ -16,7 +16,7 @@ const shuffle = (array) => {
   return array;
 }
 
-const images = shuffle([
+let images = shuffle([
   "https://f004.backblazeb2.com/file/aria-or-evie/aria.jpg",
   "https://f004.backblazeb2.com/file/aria-or-evie/evie.jpg"
 ]);
@@ -36,28 +36,40 @@ const Home = () => {
 
   const myToast = (msg) => {
     toast.dismiss();
-    toast(msg, {
-      position: toast.POSITION.TOP_CENTER,
-    })
+
   };
 
   const reset = () => {
-    setPhotoSrc(images[currentIndex]);
-    setCorrectName(images[currentIndex].split(/\//).reverse()[0]);
+    const nextIndex = currentIndex + 1 < images.length
+          ? currentIndex + 1
+          : 0;
+
+    if (nextIndex === 0) {
+      images = shuffle(images)
+    }
+
+    setCurrentIndex(nextIndex);
+    setPhotoSrc(images[nextIndex]);
+    setCorrectName(images[nextIndex].split(/\//).reverse()[0]);
   };
 
   useEffect(reset, []);
 
   const guess = (guessedName) => {
     if (correctName.toLowerCase().includes(guessedName)) {
-      myToast('Correct! You guessed right.');
+      toast.dismiss();
+      toast.success('Correct! You guessed right.', {
+        position: toast.POSITION.TOP_CENTER
+      })
       setScore(score + 1);
     } else {
-      myToast(`Wrong! It's ${correctName}.`);
+      toast.dismiss();
+      toast.error(`Wrong! It's ${correctName}.`, {
+        position: toast.POSITION.TOP_CENTER
+      })
     }
 
-    setCurrentIndex(currentIndex + 1)
-    reset(); // Set up the next round after the user guesses
+    reset();
   };
 
   if (verified === false) {
