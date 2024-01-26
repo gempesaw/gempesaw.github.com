@@ -7,8 +7,6 @@ import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const alreadyVerified = localStorage.getItem('verified');
-
 const toastOptions = {
   position: toast.POSITION.TOP_CENTER,
   autoClose: 2000,
@@ -108,7 +106,7 @@ const Home = () => {
   const [photoSrc, setPhotoSrc] = useState('');
   const [correctName, setCorrectName] = useState('');
   const [score, setScore] = useState(0);
-  const [verified, setVerified] = useState(alreadyVerified);
+  const [verified, setVerified] = useState(false);
 
   const handleInputChange = (e) => {
     if (e.target.value === "10" || e.target.value.toLowerCase() === "october" || e.target.value === "2020") {
@@ -137,8 +135,13 @@ const Home = () => {
   };
 
   useEffect(() => {
+    const alreadyVerified = localStorage.getItem('verified');
+    if (alreadyVerified === 'true') {
+      setVerified(true)
+    }
+
     reset();
-  }, []);
+  }, [verified]);
 
   const guess = (guessedName) => {
     if (correctName.toLowerCase().includes(guessedName)) {
