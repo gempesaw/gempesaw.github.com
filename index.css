@@ -1,3 +1,22 @@
+/* Comic Mono — MIT, (c) 2018 Shannon Miwa, (c) 2019 dtinth.
+   https://github.com/dtinth/comic-mono-font — see fonts/LICENSE */
+
+@font-face {
+    font-family: 'Comic Mono';
+    src: url('fonts/ComicMono.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Comic Mono';
+    src: url('fonts/ComicMono-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -9,10 +28,10 @@
 }
 
 body {
-    color: #444;
-    background: #fff;
-    font-family: 'Vollkorn', Georgia, serif;
-    font-size: 24px;
+    color: #F8F8F2;
+    background: #5A5475;
+    font-family: 'Comic Mono', ui-monospace, Menlo, monospace;
+    font-size: 20px;
     line-height: 1.5;
     font-weight: 400;
     margin: 100px auto;
@@ -20,8 +39,28 @@ body {
     width: 90%;
 }
 
+a {
+    color: #FFB8D1;
+    text-decoration-color: #8077A8;
+    text-underline-offset: 0.15em;
+}
+
+a:hover {
+    color: #FFF352;
+    text-decoration-color: #FFF352;
+}
+
+h5 {
+    color: #C5A3FF;
+}
+
+::selection {
+    background: #8077A8;
+    color: #F8F8F2;
+}
+
 ul {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 ul.talks li {
