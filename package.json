@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "a personal webiste",
   "main": "index.js",
-  "scripts": {
-    "build": "markdown-it README.md -o index.html"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gempesaw/gempesaw.github.com.git"
